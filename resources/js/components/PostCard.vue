@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div v-for="post in posts" :key="post.id" class="card mt-4">
+                <div v-for="post in getPosts" :key="post.id" class="card mt-4">
                     <div class="card-header">{{ post.title }}</div>
 
                     <div class="card-body">
@@ -12,11 +12,11 @@
 
                 <div class="pagination mt-4">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item" :class="{ disabled: page <= 1 }">
-                            <button class="page-link" @click="prevPage" :disabled="page <= 1">prev</button>
+                        <li class="page-item" :class="{ disabled: getPage <= 1 }">
+                            <button class="page-link" @click="prevPage" :disabled="getPage <= 1">prev</button>
                         </li>
-                        <li class="page-item" :class="{ disabled: page >= totalPages }">
-                            <button class="page-link" @click="nextPage" :disabled="page >= totalPages">next</button>
+                        <li class="page-item" :class="{ disabled: getPage >= getTotalPages }">
+                            <button class="page-link" @click="nextPage" :disabled="getPage >= getTotalPages">next</button>
                         </li>
                     </ul>
                 </div>
@@ -25,56 +25,42 @@
         </div>
     </div>
 </template>
-  
+
 <script lang="ts">
-
 import Vue from 'vue';
-import axios from 'axios';
-
-interface Post {
-  id: number;
-  title: string;
-  description: string;
-}
+import { mapGetters, mapActions } from 'vuex';
 
 export default Vue.extend({
-    data() {
-        return {
-            posts: [] as Post[],
-            page: 1,
-            totalPages: 1,
-        };
+    computed: {
+        ...mapGetters(['getPosts', 'getPage', 'getTotalPages']),
     },
     methods: {
-        fetchPosts() {
-            axios.get('/posts', { params: { page: this.page } })
-                .then(response => {
-                    this.posts = response.data.data;
-                    this.totalPages = response.data.last_page;
-                })
-                .catch(error => {
-                    console.error('Error getting posts:', error);
-                });
-        },
-        prevPage() {
-            if (this.page > 1) {
-                this.page--;
-                this.fetchPosts();
-            }
-        },
-        nextPage() {
-            if (this.page < this.totalPages) {
-                this.page++;
-                this.fetchPosts();
-            }
-        },
+        ...mapActions(['fetchPosts', 'prevPage', 'nextPage']),
     },
     mounted() {
         this.fetchPosts();
     },
 });
-
 </script>
-  
-<style></style>
-  
+
+<style>
+@media (max-width: 750px) {
+    .container {
+        font-size: 8px;
+    }
+
+    .page-link {
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 751px) {
+    .container {
+        font-size: 10px;
+    }
+
+    .page-link {
+        font-size: 12px;
+    }
+}
+</style>

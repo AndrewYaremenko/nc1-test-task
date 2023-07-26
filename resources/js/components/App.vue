@@ -1,7 +1,7 @@
 <template>
     <main>
-        <div class="p-3 text-white bg-dark h-100" style="width: 280px;">
-            <span class="fs-4">nc1-test-task</span>
+        <div class="navigate p-3 text-white bg-dark h-100">
+            <span class="logo">nc1-test-task</span>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
@@ -26,21 +26,31 @@
         <router-view class="mt-4"></router-view>
     </main>
 </template>
-  
+
 <script lang="ts">
 import { Component } from 'vue';
 
 export default {
-  name: 'App',
-  methods: {
-    isRouteActive(routePath: string) {
-      return this.$route.path === routePath;
+    name: 'App',
+    methods: {
+        isRouteActive(routePath: string) {
+            return this.$route.path === routePath;
+        },
     },
-  },
 } as Component;
 </script>
-  
+
 <style>
+@media (max-width: 750px) {
+    body {
+        font-size: 8px;
+    }
+
+    span {
+        font-size: 10px;
+    }
+}
+
 body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
