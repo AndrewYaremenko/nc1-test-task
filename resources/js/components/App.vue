@@ -16,6 +16,10 @@
                     <router-link to="/contacts" class="nav-link text-white"
                         :class="{ 'active': isRouteActive('/contacts') }">Contacts</router-link>
                 </li>
+                <li>
+                    <router-link to="/posts" class="nav-link text-white"
+                        :class="{ 'active': isRouteActive('/posts') }">Posts</router-link>
+                </li>
             </ul>
         </div>
 

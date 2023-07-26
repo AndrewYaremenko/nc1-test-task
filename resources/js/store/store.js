@@ -4,10 +4,31 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    state: {},
-    mutations: {},
-    actions: {},
-    getters: {},
+    state: {
+        posts: [],
+    },
+    mutations: {
+        setPosts(state, posts) {
+            state.posts = posts;
+        },
+    },
+    actions: {
+        fetchPosts({ commit }, page) {
+            return new Promise((resolve, reject) => {
+                axios.get('/posts', { params: { page } })
+                    .then(response => {
+                        commit('setPosts', response.data.data);
+                        resolve(response.data.last_page);
+                    })
+                    .catch(error => {
+                        console.error('Error getting posts:', error);
+                        reject(error);
+                    });
+            });
+        },
+    },
+    getters: {
+    },
     modules: {
 
     },
