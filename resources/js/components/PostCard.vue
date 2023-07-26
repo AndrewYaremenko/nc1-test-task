@@ -26,11 +26,21 @@
     </div>
 </template>
   
-<script>
-export default {
+<script lang="ts">
+
+import Vue from 'vue';
+import axios from 'axios';
+
+interface Post {
+  id: number;
+  title: string;
+  description: string;
+}
+
+export default Vue.extend({
     data() {
         return {
-            posts: [],
+            posts: [] as Post[],
             page: 1,
             totalPages: 1,
         };
@@ -62,7 +72,8 @@ export default {
     mounted() {
         this.fetchPosts();
     },
-};
+});
+
 </script>
   
 <style></style>

@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "strict": true,
+      "esModuleInterop": true,
+      "jsx": "preserve",
+      "noImplicitAny": false,
+      "allowSyntheticDefaultImports": true,
+      "strictPropertyInitialization": false
+    },
+    "include": [
+      "resources/js/**/*"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  

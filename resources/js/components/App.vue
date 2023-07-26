@@ -27,15 +27,17 @@
     </main>
 </template>
   
-<script>
+<script lang="ts">
+import { Component } from 'vue';
+
 export default {
-    name: 'App',
-    methods: {
-        isRouteActive(routePath) {
-            return this.$route.path === routePath;
-        },
+  name: 'App',
+  methods: {
+    isRouteActive(routePath: string) {
+      return this.$route.path === routePath;
     },
-};
+  },
+} as Component;
 </script>
   
 <style>
